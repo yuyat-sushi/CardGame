@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6753ae4663bde654bbf972d566b702d0, type: 3}
+  m_Name: 3_Cannon
+  m_EditorClassIdentifier: 
+  <Cost>k__BackingField: 3
+  <CardName>k__BackingField: "\u7832\u6483\u968A"
+  <Elements>k__BackingField: 0100000000000000
+  <Types>k__BackingField:
+  - "\u30A2\u30FC\u30DF\u30FC"
+  - 
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 1c22900611583e742a10132034a37c4a,
+    type: 3}
+  <Trigger>k__BackingField: 4
+  <ActiveManaCost>k__BackingField: 0
+  <ActiveTurnOnce>k__BackingField: 0
+  <ActiveDontSummonTurn>k__BackingField: 0
+  <Ability>k__BackingField: {fileID: 11400000, guid: e4500773232424946ad36630d863f024,
+    type: 2}

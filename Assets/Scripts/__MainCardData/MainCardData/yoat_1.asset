@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2107d999492caca418a5690306ec150e, type: 3}
+  m_Name: yoat_1
+  m_EditorClassIdentifier: 
+  <Cost>k__BackingField: 1
+  <CardName>k__BackingField: yoat
+  <Elements>k__BackingField: 0400000000000000
+  <Types>k__BackingField:
+  - "\u4EBA\u9593"
+  - "\u30A8\u30F3\u30C1\u30E3\u30F3\u30BF\u30FC"
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 1c22900611583e742a10132034a37c4a,
+    type: 3}
+  <Power>k__BackingField: 1000
+  <Trigger>k__BackingField: 0000000000000000
+  <ActiveManaCost>k__BackingField: 0000000000000000
+  <ActiveTurnOnce>k__BackingField: 0000
+  <ActiveDontSummonTurn>k__BackingField: 0000
+  <Ability>k__BackingField:
+  - {fileID: 11400000, guid: b0802353346bf464ea2fc3990ad20321, type: 2}
+  - {fileID: 11400000, guid: b0802353346bf464ea2fc3990ad20321, type: 2}

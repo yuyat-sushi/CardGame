@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2107d999492caca418a5690306ec150e, type: 3}
+  m_Name: yuyat_3
+  m_EditorClassIdentifier: 
+  <Cost>k__BackingField: 6
+  <CardName>k__BackingField: "\u6B74\u6226\u306E\u6226\u58EByuyat"
+  <Elements>k__BackingField: 0100000004000000
+  <Types>k__BackingField:
+  - "\u4EBA\u9593"
+  - "\u6226\u58EB"
+  <Sprite>k__BackingField: {fileID: 21300000, guid: dd0ea27ce8f46bd42ad591068a65837c,
+    type: 3}
+  <Power>k__BackingField: 6000
+  <Trigger>k__BackingField: 0000000000000000
+  <Ability>k__BackingField:
+  - {fileID: 11400000, guid: b0802353346bf464ea2fc3990ad20321, type: 2}
+  - {fileID: 11400000, guid: b0802353346bf464ea2fc3990ad20321, type: 2}

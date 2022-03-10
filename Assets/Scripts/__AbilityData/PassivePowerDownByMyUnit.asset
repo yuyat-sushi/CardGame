@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe5fd9dad52de5242baab243bcc11de6, type: 3}
+  m_Name: PassivePowerDownByMyUnit
+  m_EditorClassIdentifier: 
+  <Text>k__BackingField: "\u5834\u306B\u3044\u308B\u4ED6\u306E\u81EA\u5206\u30E6\u30CB\u30C3\u30C8\u306E\u6570\u3060\u3051\u3053\u306E\u30E6\u30CB\u30C3\u30C8\u306E\u30D1\u30EF\u30FC\u3092-1000\u3059\u308B\u3002 "
+  <Selectable>k__BackingField: 0
+  <SelfCast>k__BackingField: 1
+  <Category>k__BackingField: 0
+  <SelectCount>k__BackingField: 0
+  <PowerLimit>k__BackingField: -1
+  <CostLimit>k__BackingField: -1
