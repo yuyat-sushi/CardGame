@@ -1,22 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1568f8402a33eb949a55ede9a78ed0d7, type: 3}
-  m_Name: 2_HeatBlade
-  m_EditorClassIdentifier: 
-  <Cost>k__BackingField: 2
-  <CardName>k__BackingField: "\u30D2\u30FC\u30C8\u30D6\u30EC\u30FC\u30C9"
-  <Elements>k__BackingField: 0100000000000000
-  <Types>k__BackingField:
-  - "\u5263\u58EB"
-  - 
-  <Ability>k__BackingField: {fileID: 11400000, guid: 2a77d20c5a3b57942a58496853ae234a,
-    type: 2}
+version https://git-lfs.github.com/spec/v1
+oid sha256:cf8976f02d2bf786ff58b9ddaa94b7efc786e99cbc15403ea7d34f0a300f0d06
+size 697
