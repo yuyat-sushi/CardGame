@@ -1,23 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6506fe5658907740bebc443bd8371d8, type: 3}
-  m_Name: AttackTargetDealDamage3000
-  m_EditorClassIdentifier: 
-  <Text>k__BackingField: "\u653B\u6483\u76F8\u624B\u306B3000\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B\u3002"
-  <Selectable>k__BackingField: 0
-  <SelfCast>k__BackingField: 0
-  <AttackOpponentSelect>k__BackingField: 1
-  <Category>k__BackingField: 0
-  <SelectCount>k__BackingField: 0
-  <PowerLimit>k__BackingField: -1
-  <CostLimit>k__BackingField: -1
-  <Damage>k__BackingField: 3000
+version https://git-lfs.github.com/spec/v1
+oid sha256:89a1bd0d6f902474edc031670f49c1780cf356c765e1074142a5feead54c3534
+size 802
