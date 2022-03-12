@@ -1,3 +1,21 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:bdd9e87ae0d0f6356e0d2e88b8aacb410ab49193d1701ee328f72899f9d5aef7
-size 683
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a56d884a4dbf085478e38cbd83be2838, type: 3}
+  m_Name: Cost0 DealDamage2000
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: 
+  <RequireColor>k__BackingField: 0100000000000000
+  <Trigger>k__BackingField: 7
+  <SealCost>k__BackingField: 0
+  <ActiveTurnOnce>k__BackingField: 1
+  <Ability>k__BackingField: {fileID: 11400000, guid: e4500773232424946ad36630d863f024,
+    type: 2}

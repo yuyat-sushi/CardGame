@@ -1,3 +1,23 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:6f2c54f130ebd6d2245da2881eef4ff774e449d11719474b07556d4b4f9c70d4
-size 870
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6506fe5658907740bebc443bd8371d8, type: 3}
+  m_Name: SelectUDDealDamage2000
+  m_EditorClassIdentifier: 
+  <Text>k__BackingField: "\u76F8\u624B\u30E6\u30CB\u30C3\u30C8\u30FB\u30C7\u30C3\u30AD\u30DE\u30B9\u30BF\u30FC\u4E00\u4F53\u306B2000\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B\u3002"
+  <Selectable>k__BackingField: 1
+  <SelfCast>k__BackingField: 0
+  <AttackOpponentSelect>k__BackingField: 0
+  <Category>k__BackingField: 1
+  <SelectCount>k__BackingField: 1
+  <PowerLimit>k__BackingField: -1
+  <CostLimit>k__BackingField: -1
+  <Damage>k__BackingField: 2000
