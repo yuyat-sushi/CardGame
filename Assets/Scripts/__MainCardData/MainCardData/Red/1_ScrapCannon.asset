@@ -1,3 +1,40 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:d8025085569ab0abd3d0fb4c021f7847c8a54e261df63b08ac2adc690d8f3d8b
-size 1446
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2107d999492caca418a5690306ec150e, type: 3}
+  m_Name: 1_ScrapCannon
+  m_EditorClassIdentifier: 
+  <Cost>k__BackingField: 1
+  <CardName>k__BackingField: "\u30B9\u30AF\u30E9\u30C3\u30D7\u30FB\u30AB\u30CE\u30F3"
+  <Elements>k__BackingField: 0100000000000000
+  <Types>k__BackingField:
+  - "\u30B9\u30AF\u30E9\u30C3\u30D7"
+  - 
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 1c22900611583e742a10132034a37c4a,
+    type: 3}
+  <Power>k__BackingField: 2000
+  <KeyWord>k__BackingField:
+    <Dullness>k__BackingField: 1
+    <Defenseless>k__BackingField: 0
+    <Vulnerable>k__BackingField: 0
+    <Immobile>k__BackingField: 0
+    <Melee>k__BackingField: 0
+    <DoubleAttack>k__BackingField: 0
+    <Trumple>k__BackingField: 0
+    <FirstStrike>k__BackingField: 0
+    <Passing>k__BackingField: 0
+  <Trigger>k__BackingField: 0700000000000000
+  <ActiveManaCost>k__BackingField: 0100000000000000
+  <ActiveTurnOnce>k__BackingField: 0100
+  <ActiveDontSummonTurn>k__BackingField: 0100
+  <Ability>k__BackingField:
+  - {fileID: 11400000, guid: ae8cf01488802884fba8bed09b822aad, type: 2}
+  - {fileID: 11400000, guid: b0802353346bf464ea2fc3990ad20321, type: 2}

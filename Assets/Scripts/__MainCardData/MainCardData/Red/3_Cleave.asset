@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a3a633de7196c13a1a7a66fba2e65c581ce0cc412255aa3586e8f05508f1eaf1
-size 676
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1568f8402a33eb949a55ede9a78ed0d7, type: 3}
+  m_Name: 3_Cleave
+  m_EditorClassIdentifier: 
+  <Cost>k__BackingField: 0
+  <CardName>k__BackingField: "\u8599\u304E\u6255\u3044"
+  <Elements>k__BackingField: 0100000000000000
+  <Types>k__BackingField:
+  - "\u5263\u58EB"
+  - 
+  <Ability>k__BackingField: {fileID: 11400000, guid: 7f9d976498364bf4d9c7547fd4ee1ab9,
+    type: 2}

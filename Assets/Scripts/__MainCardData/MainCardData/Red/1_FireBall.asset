@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1dfa2306e9069d0c7240eee42493f9020a8bce7919b878f345ef0afbd2756050
-size 708
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1568f8402a33eb949a55ede9a78ed0d7, type: 3}
+  m_Name: 1_FireBall
+  m_EditorClassIdentifier: 
+  <Cost>k__BackingField: 1
+  <CardName>k__BackingField: "\u30D5\u30A1\u30A4\u30A2\u30FC\u30DC\u30FC\u30EB"
+  <Elements>k__BackingField: 0100000000000000
+  <Types>k__BackingField:
+  - "\u9B54\u8853\u5E2B"
+  - 
+  <Ability>k__BackingField: {fileID: 11400000, guid: 15e4d66fb50bb904e861201669bfb5dd,
+    type: 2}
