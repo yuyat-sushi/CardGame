@@ -9,7 +9,9 @@ public class LevelUp : MonoBehaviour
     TextMeshProUGUI LevelText;
 
     [SerializeField]
-    TextMeshProUGUI NextConditionText;
+    TextMeshProUGUI StatusText;
+
+    float InvisibleCount;
 
     // Start is called before the first frame update
     void Start()
@@ -20,17 +22,14 @@ public class LevelUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        InvisibleCount -= Time.deltaTime;
+        if(InvisibleCount <= 0) gameObject.SetActive(false);
     }
 
     public void Instantiate(int player){
-        int level = BattleField.DeckMaster[player].LiberationLevel;
-        if(!BattleField.DeckMaster[player].IsLiberation){
-            LevelText.text = level + " ⇒ " + (level + 1);
-            NextConditionText.text = "Next...\n" + BattleField.DeckMaster[player].SealCard[level].Text;
-        }else{
-            LevelText.text = "Rank" + level;
-            NextConditionText.text = "Libelation...Now!";
-        }
+        int level = BattleField.DeckMaster[player].SealRank;
+        LevelText.text = "Rank" + level;
+        StatusText.text = "Power " + BattleField.DeckMaster[player].BasePower + "\n" + BattleField.DeckMaster[player].BaseKeyWord.ToString();
+        InvisibleCount = 1.5f;
     }
 }

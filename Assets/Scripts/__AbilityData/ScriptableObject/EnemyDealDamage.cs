@@ -6,10 +6,11 @@ using UnityEngine;
 public class EnemyDealDamage : BaseAbility {
     [field: SerializeField]
     public int Damage{get; private set;}
-    public override void Ability(){
-        BattleField.DealDamage(!BattleField.OperationPlayerCurrentTurn, Damage);
+    public override void Ability(int actplayer){
+        bool opponentplayer = actplayer != 0;
+        BattleField.DealDamage(opponentplayer, Damage);
     }
-    public override void Ability(bool[,] selected){
-        Ability();
+    public override void Ability(bool[,] selected, int actplayer){
+        Ability(actplayer);
     }
 }

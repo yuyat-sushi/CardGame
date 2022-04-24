@@ -152,7 +152,6 @@ public static class BattleField
         bool rand = Random.Range(0, 2) == 0;
         OperationPlayerFirstPlay = rand;            //先攻後攻プレイヤーの決定　操作プレイヤーが先攻だった場合true
         OperationPlayerCurrentTurn = rand;          //操作プレイヤーがターンプレイヤーかどうかを代入　そうだった場合true
-        BattleField.ManaIncrease(!OperationPlayerCurrentTurn); //後攻プレイヤーはマナを追加で得る
         //ターン数初期化
         TurnCount = 1;
         //シールカード用のカウントをリセットする
@@ -249,13 +248,10 @@ public static class BattleField
     }
 
     //マナを減らす
-    //結果をboolの返り値にして、0未満になってしまう場合マナの引き算を行わずfalseにする
-    public static bool ManaDecrease(bool player, int manaCost){
+    public static void ManaDecrease(bool player, int manaCost){
         int setplayer = player ? 0 : 1;
-        //マナが0未満になってしまう場合、マナの引き算を行わずfalseにする
-        if((Mana[setplayer] - manaCost) < 0) return false;
         Mana[setplayer] -= manaCost;
-        return true;
+        if(Mana[setplayer] < 0) Mana[setplayer] = 0;
     }
     
     //マナを回復する
@@ -325,14 +321,13 @@ public static class BattleField
     }
 
     //手札からフィールドにカードを出す
-    //マナが足りない、フィールドが埋まっているで成功しなかった場合、falseを返す
+    //フィールドが埋まっている等、成功しなかった場合、falseを返す
     //Enteredトリガーが存在する場合、それを実行する
     public static bool PrayCard(bool player, int number, bool[,] select){
         int setplayer = player ? 0 : 1;
         int cardnum = HandList[setplayer][number];
         MainCardData card = MainCardDB.Cards[cardnum];
-        //マナが足りない場合、falseにする
-        if(!ManaDecrease(player, card.Cost)) return false;
+        ManaDecrease(player, card.Cost);
         if(card is UnitCardData){
             UnitCardData unit = (UnitCardData)card;
             for(int i = 0; i < 5; i++){
@@ -343,7 +338,7 @@ public static class BattleField
                     for(int j = 0; j < 2; j++){
                         if(unit.Trigger[j] == Trigger.entered){
                             Debug.Log("Triggered Enter");
-                            unit.Ability[j].Ability(select);
+                            unit.Ability[j].Ability(select, setplayer);
                             break;
                         }
                     }
@@ -359,7 +354,7 @@ public static class BattleField
                     HandList[setplayer].RemoveAt(number);  
                     if(enchant.Trigger == Trigger.entered){
                         Debug.Log("Triggered Enter");
-                        enchant.Ability.Ability(select);
+                        enchant.Ability.Ability(select, setplayer);
                         break;
                     }                  
                     break;
@@ -368,7 +363,7 @@ public static class BattleField
             }
         }else if(card is SpellCardData){
             SpellCardData spell = (SpellCardData)card;
-            spell.Ability.Ability(select);
+            spell.Ability.Ability(select, setplayer);
             ToTrushHandCard(player, number);
         }
         return true;
@@ -393,7 +388,7 @@ public static class BattleField
                     bool[,] select = new bool[2,7];
                     if(unit.Ability[i].SelfCast) select[attackPlayer, attacker] = true;
                     if(unit.Ability[i].AttackOpponentSelect) select[defencePlayer, defencer] = true;
-                    unit.Ability[i].Ability(select);
+                    unit.Ability[i].Ability(select, attackPlayer);
                 }
             }
             if(defencer < 5){
@@ -403,17 +398,21 @@ public static class BattleField
                 if(Unit[attackPlayer,attacker].CurrentKeyWord.FirstStrike &&
                   !Unit[defencePlayer,defencer].CurrentKeyWord.FirstStrike){
                     //攻撃側だけが先制を持っていた場合、防御側からダメージを受ける
+                    //防御側が無防備だった場合、攻撃側はダメージは受けない
                     Unit[defencePlayer,defencer].Damage(atkpower);
-                    if(Unit[defencePlayer,defencer].CurrentPower > 0) Unit[attackPlayer, attacker].Damage(defpower);
+                    if(Unit[defencePlayer,defencer].CurrentPower > 0 && 
+                       !Unit[defencePlayer,defencer].CurrentKeyWord.Defenseless) Unit[attackPlayer, attacker].Damage(defpower);
                 }else if(!Unit[attackPlayer,attacker].CurrentKeyWord.FirstStrike &&
                           Unit[defencePlayer,defencer].CurrentKeyWord.FirstStrike){
-                    //守備側だけが先制を持っていた場合、攻撃側からダメージを受ける
-                    Unit[attackPlayer,attacker].Damage(defpower);
+                    //防御側だけが先制を持っていた場合、攻撃側からダメージを受ける
+                    //防御側が無防備だった場合、攻撃側はダメージは受けない
+                    if(!Unit[defencePlayer,defencer].CurrentKeyWord.Defenseless) Unit[attackPlayer,attacker].Damage(defpower);
                     if(Unit[attackPlayer,attacker].CurrentPower > 0) Unit[defencePlayer,defencer].Damage(atkpower);
                 }else{
                     //両方共先制だった場合、または両方共先制を持っていなかった場合、両者ダメージを受ける
+                    //防御側が無防備だった場合、攻撃側はダメージは受けない
                     Unit[defencePlayer,defencer].Damage(atkpower);
-                    Unit[attackPlayer,attacker].Damage(defpower);
+                    if(!Unit[defencePlayer,defencer].CurrentKeyWord.Defenseless) Unit[attackPlayer,attacker].Damage(defpower);
                 }
                 //貫通を持っていてパワーを上回っていた場合、相手プレイヤーにダメージを与える
                 if(Unit[attackPlayer,attacker].CurrentKeyWord.Trumple && (atkpower - defpower) > 0){
@@ -426,17 +425,21 @@ public static class BattleField
                 if(Unit[attackPlayer,attacker].CurrentKeyWord.FirstStrike &&
                   !DeckMaster[defencePlayer].CurrentKeyWord.FirstStrike){
                     //攻撃側だけが先制を持っていた場合、防御側からダメージを受ける
+                    //防御側が無防備だった場合、攻撃側はダメージは受けない
                     DeckMaster[defencePlayer].Damage(atkpower);
-                    if(DeckMaster[defencePlayer].CurrentPower > 0) Unit[attackPlayer, attacker].Damage(defpower);
+                    if(DeckMaster[defencePlayer].CurrentPower > 0 &&
+                       !DeckMaster[defencePlayer].CurrentKeyWord.Defenseless) Unit[attackPlayer, attacker].Damage(defpower);
                 }else if(!Unit[attackPlayer,attacker].CurrentKeyWord.FirstStrike &&
                           DeckMaster[defencePlayer].CurrentKeyWord.FirstStrike){
-                    //守備側だけが先制を持っていた場合、攻撃側からダメージを受ける
-                    Unit[attackPlayer,attacker].Damage(defpower);
+                    //防御側だけが先制を持っていた場合、攻撃側からダメージを受ける
+                    //防御側が無防備だった場合、攻撃側はダメージは受けない
+                    if(!DeckMaster[defencePlayer].CurrentKeyWord.Defenseless) Unit[attackPlayer,attacker].Damage(defpower);
                     if(Unit[attackPlayer,attacker].CurrentPower > 0) DeckMaster[defencePlayer].Damage(atkpower);
                 }else{
                     //両方共先制だった場合、または両方共先制を持っていなかった場合、両者ダメージを受ける
+                    //防御側が無防備だった場合、攻撃側はダメージは受けない
                     DeckMaster[defencePlayer].Damage(atkpower);
-                    Unit[attackPlayer,attacker].Damage(defpower);
+                    if(!DeckMaster[defencePlayer].CurrentKeyWord.Defenseless) Unit[attackPlayer,attacker].Damage(defpower);
                 }
                 //貫通を持っていてパワーを上回っていた場合、相手プレイヤーにダメージを与える
                 if(Unit[attackPlayer,attacker].CurrentKeyWord.Trumple && (atkpower - defpower) > 0){
@@ -456,17 +459,21 @@ public static class BattleField
                 if(DeckMaster[attackPlayer].CurrentKeyWord.FirstStrike &&
                   !Unit[defencePlayer,defencer].CurrentKeyWord.FirstStrike){
                     //攻撃側だけが先制を持っていた場合、防御側からダメージを受ける
+                    //防御側が無防備だった場合、攻撃側はダメージは受けない
                     Unit[defencePlayer,defencer].Damage(atkpower);
-                    if(Unit[defencePlayer,defencer].CurrentPower > 0) DeckMaster[attackPlayer].Damage(defpower);
+                    if(Unit[defencePlayer,defencer].CurrentPower > 0 && 
+                       !Unit[defencePlayer,defencer].CurrentKeyWord.Defenseless) DeckMaster[attackPlayer].Damage(defpower);
                 }else if(!DeckMaster[attackPlayer].CurrentKeyWord.FirstStrike &&
                           Unit[defencePlayer,defencer].CurrentKeyWord.FirstStrike){
                     //守備側だけが先制を持っていた場合、攻撃側からダメージを受ける
-                    DeckMaster[attackPlayer].Damage(defpower);
+                    //防御側が無防備だった場合、攻撃側はダメージは受けない
+                    if(!Unit[defencePlayer,defencer].CurrentKeyWord.Defenseless) DeckMaster[attackPlayer].Damage(defpower);
                     if(DeckMaster[attackPlayer].CurrentPower > 0) Unit[defencePlayer,defencer].Damage(atkpower);
                 }else{
                     //両方共先制だった場合、または両方共先制を持っていなかった場合、両者ダメージを受ける
+                    //防御側が無防備だった場合、攻撃側はダメージは受けない
                     Unit[defencePlayer,defencer].Damage(atkpower);
-                    DeckMaster[attackPlayer].Damage(defpower);
+                    if(!Unit[defencePlayer,defencer].CurrentKeyWord.Defenseless) DeckMaster[attackPlayer].Damage(defpower);
                 }
                 //貫通を持っていてパワーを上回っていた場合、相手プレイヤーにダメージを与える
                 if(DeckMaster[attackPlayer].CurrentKeyWord.Trumple && (atkpower - defpower) > 0){
@@ -479,17 +486,21 @@ public static class BattleField
                 if(DeckMaster[attackPlayer].CurrentKeyWord.FirstStrike &&
                   !DeckMaster[defencePlayer].CurrentKeyWord.FirstStrike){
                     //攻撃側だけが先制を持っていた場合、防御側からダメージを受ける
+                    //防御側が無防備だった場合、攻撃側はダメージは受けない
                     DeckMaster[defencePlayer].Damage(atkpower);
-                    if(DeckMaster[defencePlayer].CurrentPower > 0) DeckMaster[attackPlayer].Damage(defpower);
+                    if(DeckMaster[defencePlayer].CurrentPower > 0 &&
+                       !DeckMaster[defencePlayer].CurrentKeyWord.Defenseless) DeckMaster[attackPlayer].Damage(defpower);
                 }else if(!DeckMaster[attackPlayer].CurrentKeyWord.FirstStrike &&
                           DeckMaster[defencePlayer].CurrentKeyWord.FirstStrike){
                     //守備側だけが先制を持っていた場合、攻撃側からダメージを受ける
-                    DeckMaster[attackPlayer].Damage(defpower);
+                    //防御側が無防備だった場合、攻撃側はダメージは受けない
+                    if(!DeckMaster[defencePlayer].CurrentKeyWord.Defenseless) DeckMaster[attackPlayer].Damage(defpower);
                     if(DeckMaster[attackPlayer].CurrentPower > 0) Unit[defencePlayer,defencer].Damage(atkpower);
                 }else{
                     //両方共先制だった場合、または両方共先制を持っていなかった場合、両者ダメージを受ける
+                    //防御側が無防備だった場合、攻撃側はダメージは受けない
                     DeckMaster[defencePlayer].Damage(atkpower);
-                    DeckMaster[attackPlayer].Damage(defpower);
+                    if(!DeckMaster[defencePlayer].CurrentKeyWord.Defenseless) DeckMaster[attackPlayer].Damage(defpower);
                 }
                 //貫通を持っていてパワーを上回っていた場合、相手プレイヤーにダメージを与える
                 if(DeckMaster[attackPlayer].CurrentKeyWord.Trumple && (atkpower - defpower) > 0){

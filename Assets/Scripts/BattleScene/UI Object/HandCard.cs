@@ -3,27 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class HandCard : MonoBehaviour, IPointerDownHandler, IDragHandler, IBeginDragHandler, IEndDragHandler,IDropHandler
 {
     [SerializeField]
-    Text Cost = null;
+    TextMeshProUGUI Cost = null;
     [SerializeField]
-    Text CardName = null;
+    TextMeshProUGUI CardName = null;
     [SerializeField]
-    Text CardType = null;
+    TextMeshProUGUI CardType = null;
     [SerializeField]
     Image Color1 = null;
     [SerializeField]
     Image Color2 = null;
     [SerializeField]
-    Text CardText = null;
+    TextMeshProUGUI CardText = null;
     [SerializeField]
-    Text Type1 = null;
+    TextMeshProUGUI Type = null;
     [SerializeField]
-    Text Type2 = null;
-    [SerializeField]
-    Text Power = null;
+    TextMeshProUGUI Power = null;
     [SerializeField]
     MainCardDataBase CardDataBase = null;
 
@@ -228,8 +227,9 @@ public class HandCard : MonoBehaviour, IPointerDownHandler, IDragHandler, IBegin
         Card = CardDataBase.Cards[CardNum];
         Cost.text = Card.Cost.ToString();
         CardName.text = Card.CardName;
-        Type1.text = Card.Types[0];
-        Type2.text = Card.Types[1];
+        Type.text = Card.Types[0];
+        if(Card.Types[0] != "" && Card.Types[1] != "") Type.text += "/";
+        Type.text += Card.Types[1];
         switch(Card.Elements[0]){
             case Element.Black:
                 Color1.color = Color.black;

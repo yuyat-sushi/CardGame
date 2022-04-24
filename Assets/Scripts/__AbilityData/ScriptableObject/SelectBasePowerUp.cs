@@ -9,7 +9,7 @@ public class SelectBasePowerUp : BaseAbility {
 
     //SelectBasePowerUp
     //Powerの値分、selectedにあるユニットのパワーを増減する
-    public override void Ability(bool[,] selected){
+    public override void Ability(bool[,] selected, int actplayer){
         Debug.Log("SelectBasePowerUp");
         for(int j = 0; j < 2; j++){
             for(int i = 0; i < 5; i++){

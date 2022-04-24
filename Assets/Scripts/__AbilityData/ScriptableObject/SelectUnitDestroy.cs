@@ -7,7 +7,7 @@ public class SelectUnitDestroy : BaseAbility {
 
     //SelectUnitDestroy
     //選択したユニットを破壊する
-    public override void Ability(bool[,] selected){
+    public override void Ability(bool[,] selected, int actplayer){
         Debug.Log("SelectUnitDestroy");
         for(int j = 0; j < 2; j++){
             for(int i = 0; i < 5; i++){

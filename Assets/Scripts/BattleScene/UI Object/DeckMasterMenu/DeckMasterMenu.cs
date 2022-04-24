@@ -30,7 +30,9 @@ public class DeckMasterMenu : MonoBehaviour
     Button[] AbilityButton = new Button[2];
 
     [SerializeField]
-    TextMeshProUGUI[] SealText = new TextMeshProUGUI[4];
+    TextMeshProUGUI LiberationCount;
+    [SerializeField]
+    TextMeshProUGUI SealText;
 
     [SerializeField]
     AttackMenu AttackMenu;
@@ -101,7 +103,7 @@ public class DeckMasterMenu : MonoBehaviour
                 Color2.color = Color.clear;
                 break;
         }
-        KeyWord.text = "";
+        KeyWord.text = BattleField.DeckMaster[0].CurrentKeyWord.ToString();
         for(int i = 0; i < 2; i++){
             //!(card.ActiveTurnOnce[0] && BattleField.Unit[0, fieldnum].ActiveThisTurn[0]) =
             //カードデータ側のActiveTurnOnceとフィールド側のActiveThisTurnが両方共trueでなかったらtrueと返す
@@ -137,18 +139,11 @@ public class DeckMasterMenu : MonoBehaviour
             }
             AbilityText[i].text += BattleField.DeckMaster[0].AbilityCard[i].Ability.Text + "\n";
         }
+        LiberationCount.text = "SealCard(開放まであと" + BattleField.DeckMaster[0].LibelationTurn + "ターン)";
+        SealText.text = "";
         for(int i = 0; i < 4; i++){
             if(i < BattleField.DeckMaster[0].SealRank){
-                SealText[i].text = "Level "+ (i+1) + ":\n" + BattleField.DeckMaster[0].SealCard[i].Text;
-                if(i < BattleField.DeckMaster[0].LiberationLevel){
-                    SealText[i].color = Color.green;
-                }else if(i == BattleField.DeckMaster[0].LiberationLevel){
-                    SealText[i].color = Color.white;
-                }else if(i > BattleField.DeckMaster[0].LiberationLevel){
-                    SealText[i].color = Color.gray;
-                }
-            }else{
-                SealText[i].text = "";
+                SealText.text += BattleField.DeckMaster[0].SealCard[i].Text + "\n";
             }
         }
     }

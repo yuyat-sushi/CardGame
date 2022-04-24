@@ -8,7 +8,7 @@ public class PassivePowerDownByMyUnit : BaseAbility {
     //PassivePowerDownByMyUnit
     //Passive効果のself前提
     //パワーを基本パワーに戻した後、バフ対象以外の自分ユニットの数だけパワーを-1000する
-    public override void Ability(bool[,] selected){
+    public override void Ability(bool[,] selected, int actplayer){
         //Debug.Log("PassiveSelectPowerDown");
         //ユニット数の算出
         int[] unit = new int[2];

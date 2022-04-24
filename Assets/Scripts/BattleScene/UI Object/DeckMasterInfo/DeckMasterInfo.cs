@@ -26,6 +26,8 @@ public class DeckMasterInfo : MonoBehaviour
     TextMeshProUGUI AbilityText;
 
     [SerializeField]
+    TextMeshProUGUI LiberationCount;
+    [SerializeField]
     TextMeshProUGUI SealText;
 
     // Start is called before the first frame update
@@ -115,10 +117,11 @@ public class DeckMasterInfo : MonoBehaviour
             }
             AbilityText.text += BattleField.DeckMaster[playernum].AbilityCard[i].Ability.Text + "\n";
         }
+        LiberationCount.text = "SealCard(開放まであと" + BattleField.DeckMaster[0].LibelationTurn + "ターン)";
         SealText.text = "";
         for(int i = 0; i < 4; i++){
             if(i < BattleField.DeckMaster[playernum].SealRank){
-                SealText.text += "Level "+ (i+1) + ":\n" + BattleField.DeckMaster[playernum].SealCard[i].Text + "\n";
+                SealText.text += BattleField.DeckMaster[playernum].SealCard[i].Text + "\n";
             }
         }
     }

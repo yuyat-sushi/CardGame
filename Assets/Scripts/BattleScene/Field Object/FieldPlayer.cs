@@ -29,7 +29,7 @@ public class FieldPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if((BattleField.CurrentMenuStatus == MenuStatus.AttackMenu && playernum == 1 && AttackMenu.Selected == 5) ||
+        if((BattleField.CurrentMenuStatus == MenuStatus.AttackMenu && playernum == 1 && AttackMenu.Selected == 6) ||
            ((BattleField.CurrentMenuStatus == MenuStatus.AbilityMenu && 
             AbilityMenu.Ability.Category != SelectCategory.Enchant &&
             AbilityMenu.Selected[playernum, 6]))){

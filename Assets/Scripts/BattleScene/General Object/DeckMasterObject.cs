@@ -14,11 +14,11 @@ public class DeckMasterObject
         //シールランク
         public int SealRank{get; private set;}
         //シールカード
-        public SealCardData[] SealCard{get; private set;} = new SealCardData[4];
+        public SealCardData[] SealCard{get; private set;} = new SealCardData[6];
         //開放状態か
         public bool IsLiberation{get; private set;}
-        //解放レベル
-        public int LiberationLevel{get; private set;}
+        //開放までのターン数
+        public int LibelationTurn{get; private set;}
         //シールマナ
         public int SealMana{get; private set;}
         //基礎パワー
@@ -54,38 +54,31 @@ public class DeckMasterObject
 
         public DeckMasterObject(DeckData deck){
                 Name = deck.MasterName;
-                for(int i = 0; i < 2; i++){
-                        DeckMasterColor[i] = deck.Color[i];
-                }
                 SealRank = deck.SealRank;
                 Array.Copy(deck.SealCard, SealCard, SealRank);
                 Types[0] = deck.Types[0];
                 Types[1] = deck.Types[1];
                 IsLiberation = false;
-                LiberationLevel = 0;
+                LibelationTurn = (SealRank - 1) * 2;
                 SealMana = 0;
-                BasePower = SealRank * 2000 + 1000;
-                if(DeckMasterColor[0]==Element.None||DeckMasterColor[1]==Element.None){
-                        BasePower += 1000;
+                //色の仕様を変更する必要あり
+                //現状だと単色のみ対応
+                BaseKeyWord = new KeyWord();
+                BasePower = 0;
+                for(int i = 0; i < SealRank; i++){
+                        DeckMasterColor[0] = SealCard[i].Element;
+                        BaseKeyWord.AddKeyword(SealCard[i].KeyWord);
+                        BasePower += SealCard[i].Power;
                 }
                 CurrentPower = BasePower;
-                RecievedDamage = 0;  
+                RecievedDamage = 0;
                 RecievedBuff = 0;
-                BaseKeyWord = new KeyWord(deck.KeyWord);
                 CurrentKeyWord = new KeyWord(BaseKeyWord);
                 OpponentTurnKeyWord = new KeyWord();
                 TapMode = false;
                 DoubleAttacked = false;
                 for(int i = 0; i < 2; i++){
                         AbilityCard[i] = deck.AbilityCard[i];
-                }
-        }
-
-        public void LiberationLevelUp(){
-                LiberationLevel++;
-                if(LiberationLevel == SealRank){
-                        IsLiberation = true;
-                        SealMana = SealRank;
                 }
         }
 
@@ -173,5 +166,17 @@ public class DeckMasterObject
                 if(StanCount > 0){
                         StanCount--;
                 }
+        }
+
+        public bool Libelation(){
+                if(LibelationTurn > 0){
+                        LibelationTurn--;
+                        if(LibelationTurn <= 0){
+                                SealMana = SealRank;
+                                IsLiberation = true;
+                                return true;
+                        }
+                }
+                return false;
         }
 }

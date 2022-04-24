@@ -46,23 +46,19 @@ public class AbilityMenu : MonoBehaviour
         PlannedCategory = category;
         PlannedNum = num;
         PlannedCard = card;
-        for(int j = 0; j < 2; j++)
-            for(int i = 0; i < 5; i++)
-                Selected[j,i] = false;
+        ResetSelect();
     }
 
     public void Instantiate(BaseAbility ability){
         BattleField.MenuChange(MenuStatus.AbilityMenu);
         Ability = ability;
         PlannedNum = -1;
-        for(int j = 0; j < 2; j++)
-            for(int i = 0; i < 5; i++)
-                Selected[j,i] = false;
+        ResetSelect();
     }
 
     public void ResetSelect(){
         for(int j = 0; j < 2; j++){
-            for(int i = 0; i < 5; i++){
+            for(int i = 0; i < 7; i++){
                 Selected[j, i] = false;
             }
         }

@@ -98,7 +98,6 @@ public class UnitCardObject
         //パワーを増減させ、増減値を記録する
         public void BasePowerUpDown(int power){
                 BasePower += power;
-                PowerUpDown(power);
         }
 
         //パワーを特定の値にする

@@ -9,7 +9,7 @@ public class KeyWord {
         [field: SerializeField]
         public bool Dullness{get; set;}
         //無防備
-        //相手はダイレクトアタックができる
+        //アタックされた時、反撃することが出来ない
         [field: SerializeField]
         public bool Defenseless{get; set;}
         //脆弱
@@ -40,6 +40,26 @@ public class KeyWord {
         //相手ユニットを無視してアタックできる
         [field: SerializeField]
         public bool Passing{get; set;}
+        //結界
+        //相手はこのカードを効果で選べない
+        [field: SerializeField]
+        public bool Proof{get; set;}
+        //防弾
+        //カードの効果によるダメージを受けない
+        [field: SerializeField]
+        public bool Protect{get; set;}
+        //守護
+        //相手は守護を持ったカード以外をアタックする事が出来ない（デッキマスターが持った場合は自ユニットが優先され、通過で無視される）
+        [field: SerializeField]
+        public bool GuardMan{get; set;}
+        //接死
+        //このカードとのバトルでダメージを受けたカードはバトル終了後破壊される
+        [field: SerializeField]
+        public bool Slayer{get; set;}
+        //威迫
+        //コスト3以下のユニットにアタックされず、コスト3以下のユニットを無視してアタックできる。
+        [field: SerializeField]
+        public bool Menace{get; set;}
 
         public KeyWord(){
                 Dullness = false;
@@ -51,6 +71,11 @@ public class KeyWord {
                 Trumple = false;
                 FirstStrike = false;
                 Passing = false;
+                Proof = false;
+                Protect = false;
+                GuardMan = false;
+                Slayer = false;
+                Menace = false;
         }
 
         public KeyWord(KeyWord keyword){
@@ -63,6 +88,11 @@ public class KeyWord {
                 Trumple = keyword.Trumple;
                 FirstStrike = keyword.FirstStrike;
                 Passing = keyword.Passing;
+                Proof = keyword.Proof;
+                Protect = false;
+                GuardMan = keyword.GuardMan;
+                Slayer = keyword.Slayer;
+                Menace = keyword.Menace;
         }
 
         //キーワードを追加する
@@ -77,6 +107,11 @@ public class KeyWord {
                 Trumple |= keyword.Trumple;
                 FirstStrike |= keyword.FirstStrike;
                 Passing |= keyword.Passing;
+                Proof |= keyword.Proof;
+                Protect |= keyword.Protect;
+                GuardMan |= keyword.GuardMan;
+                Slayer |= keyword.Slayer;
+                Menace |= keyword.Menace;
         }
 
         //キーワードを表示する
@@ -100,6 +135,16 @@ public class KeyWord {
                         text += "◆先制 ";
                 }if(Passing){
                         text += "◆通過 ";
+                }if(Proof){
+                        text += "◆結界 ";
+                }if(Protect){
+                        text += "◆防弾 ";
+                }if(GuardMan){
+                        text += "◆守護 ";
+                }if(Slayer){
+                        text += "◆接死 ";
+                }if(Menace){
+                        text += "◆威迫 ";
                 }
                 if(text != "") text += "\n";
                 return text;

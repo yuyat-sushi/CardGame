@@ -87,9 +87,21 @@ public class AttackMenu : MonoBehaviour
             //デッキマスターやプレイヤーを選択した場合、相手フィールドのユニットがいるかどうかを判定する
             //キーワード「無防備」ユニットがいる場合はその時点で選択出来るようになる
             int FieldCheck = 0;
+            bool Passing;
+            bool Melee;
+            if(Fieldnum == 5){
+                Passing = BattleField.DeckMaster[0].CurrentKeyWord.Passing;
+            }else{
+                Passing = BattleField.Unit[0,Fieldnum].CurrentKeyWord.Passing;
+            }
+            if(Fieldnum == 5){
+                Melee = BattleField.DeckMaster[0].CurrentKeyWord.Melee;
+            }else{
+                Melee = BattleField.Unit[0,Fieldnum].CurrentKeyWord.Melee;
+            }
             for(int i = 0; i < 5; i++){
                 if(BattleField.Unit[1,i].CardID != -1) FieldCheck++;
-                if(BattleField.Unit[0,Fieldnum].CurrentKeyWord.Passing || BattleField.Unit[1,i].CurrentKeyWord.Defenseless){
+                if(Passing){
                     FieldCheck = 0;
                     break;
                 }
@@ -98,7 +110,7 @@ public class AttackMenu : MonoBehaviour
                 //フィールドチェックに成功した場合の処理
                 //デッキマスターの場合は攻撃相手のデッキマスターが開放されており、スタンしていない場合のみ選択可能
                 //プレイヤーはキーワード「近接」がついていなければ可能
-                if((select == 5 && BattleField.DeckMaster[1].IsLiberation && BattleField.DeckMaster[1].StanCount <= 0)||(select == 6 && !BattleField.Unit[0,Fieldnum].CurrentKeyWord.Melee)){
+                if((select == 5 && BattleField.DeckMaster[1].IsLiberation && BattleField.DeckMaster[1].StanCount <= 0)||(select == 6 && !Melee)){
                     Selected = select;
                 }
             }

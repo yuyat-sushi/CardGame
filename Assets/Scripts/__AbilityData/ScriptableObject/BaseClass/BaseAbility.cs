@@ -21,10 +21,10 @@ public abstract class BaseAbility : ScriptableObject {
         [field: SerializeField]
         public int CostLimit{get; private set;} = -1;
 
-        public virtual void Ability(){
+        public virtual void Ability(int actplayer){
                 Debug.LogError("This is Select Only!");
         }
-        public virtual void Ability(bool[,] selected){
+        public virtual void Ability(bool[,] selected, int actplayer){
                 Debug.LogError("No Define Ability(bool[,] Selected)!");
         }
 }

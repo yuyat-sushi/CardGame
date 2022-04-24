@@ -8,7 +8,7 @@ public class SelectDealDamage : BaseAbility {
     public int Damage{get; private set;}
     //SelectDealDamage
     //選択したユニット・デッキマスターをアンタップする
-    public override void Ability(bool[,] selected){
+    public override void Ability(bool[,] selected, int actplayer){
         Debug.Log("SelectDealDamage");
         for(int j = 0; j < 2; j++){
             for(int i = 0; i < 5; i++){
